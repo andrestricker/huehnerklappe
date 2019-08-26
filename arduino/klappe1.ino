@@ -46,10 +46,10 @@ bool ADy, A12h, Apm;
 #define RST_PIN -1
 SSD1306AsciiWire oled;
 
+
 // Buttons
 int btn_up_pin = 4;
 int btn_down_pin = 5;
-
 int btn_ok_pin = 8;
 int btn_back_pin = 9;
 
@@ -57,6 +57,7 @@ int btn_back_pin = 9;
 // Switches (Door)
 int sw_top = 6;
 int sw_btm = 7; 
+
 
 // Motor
 int motor_pin1 = 2;
@@ -66,37 +67,45 @@ int motor_pin2 = 3;
 // Light sensor
 int lightsensor_pin=A0;
 int light_intensity;                                 // Container for the currently measured light intensity
+int flattened_light_intensity;
 bool light_threshold_passed=false;                   // flag if the threshold has been passed after the n measures
 int number_of_light_measures=3;                      // number of measures
-int measure_interval=5;                              // measuer every n seconds
+int measure_interval=5;                              // measuere every n seconds
 int light_measures[3];
 int second_measured;
 int light_measure_counter=0;
 
 
 // Idle Display variables
-char* idle_display_content="temperature";              // brightness or temperature
+char* idle_display_content="brightness";              // brightness or temperature
 String buf_line1;
 String buf_line2;
-int display_delay=1001;                               // delay after each interaction
+int display_delay=1000;                               // delay after each interaction
+
 
 // Door states
 bool door_is_up=false;
 bool door_is_down=false;
 
+
 // Operating states (start in auto-state)
 bool is_auto_state=true;
 
-void loop() {
 
+
+
+void loop() {
+  light_intensity=get_light_intensity();
+  
   //idle display
   if(idle_display_content=="brightness"){
-    set_display("Brightness",String(analogRead(lightsensor_pin)));
+    set_display("Brightness",String(flattened_light_intensity));
   } 
   
   else if(idle_display_content=="temperature"){
     set_display("Temperature",String(get_temperature()));
   }
+  
   
   //toggle the auto state on the green button. 
   if(buttonstate(btn_ok_pin)){
@@ -111,6 +120,7 @@ void loop() {
   }
 
 
+
 //auto mode - look at time/brightness to move the doors
   if(is_auto_state){  
     set_passed_threshold();
@@ -123,6 +133,7 @@ void loop() {
       door_down(); 
     }
 
+
 // manual mode - use the buttons
   } else {  
     if(buttonstate(btn_up_pin)){
@@ -133,5 +144,7 @@ void loop() {
       door_down();
     }
   }
+
+  
   delay(200);
 }

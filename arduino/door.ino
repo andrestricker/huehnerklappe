@@ -1,6 +1,8 @@
+
 bool is_top(){
   return buttonstate(sw_top);
 }
+
 bool is_bottom(){
   return buttonstate(sw_btm);
 }

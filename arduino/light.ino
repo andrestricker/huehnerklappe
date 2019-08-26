@@ -1,6 +1,6 @@
-bool check_light_threshold(){
-  return analogRead(lightsensor_pin)>=light_threshold;
-  
+
+int get_light_intensity(){
+  analogRead(lightsensor_pin);
 }
 
 // check if the light has passed the threshold. If so, set global var to true. If not, aset to false
@@ -17,6 +17,7 @@ void set_passed_threshold(){
         sum+=light_measures[i];
       }
       light_measure_counter=0;
+      flattened_light_intensity=sum/number_of_light_measures;
       if(sum>=light_threshold*number_of_light_measures){
         light_threshold_passed=true;
       } else {
