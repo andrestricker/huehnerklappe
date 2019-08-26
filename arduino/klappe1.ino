@@ -1,17 +1,10 @@
-/*
-DS3231_test.pde
-Eric Ayars
-4/11
 
-Test/demo of read routines for a DS3231 RTC.
-
-Turn on the serial monitor after loading this to check if things are
-working as they should.
-
-*/
 
 // Function Prototypes:
 void set_display(String line1, String line2="");
+
+
+
 
 // Values for opening/closing the door - configure only this... 
 int hours_open=07;
@@ -21,6 +14,8 @@ int hours_close=15;
 int minutes_close=0;
 
 int light_threshold=3;
+
+
 
 
 #include <DS3231.h>
