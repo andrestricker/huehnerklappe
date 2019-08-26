@@ -78,7 +78,7 @@ int light_measure_counter=0;
 char* idle_display_content="temperature";              // brightness or temperature
 String buf_line1;
 String buf_line2;
-int display_delay=1000;                               // delay after each interaction
+int display_delay=1001;                               // delay after each interaction
 
 // Door states
 bool door_is_up=false;
