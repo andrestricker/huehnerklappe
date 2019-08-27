@@ -40,7 +40,7 @@ void setup() {
 
   // lower door as a start and greet whoever is there.
   set_display("Hello","Ladies");
-  delay(1000); 
+  delay(3000); 
   door_down();
   
   Serial.println("End of Setup");
