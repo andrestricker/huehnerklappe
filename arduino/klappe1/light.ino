@@ -1,6 +1,6 @@
 
 int get_light_intensity(){
-  analogRead(lightsensor_pin);
+  return analogRead(lightsensor_pin);
 }
 
 // check if the light has passed the threshold. If so, set global var to true. If not, aset to false
