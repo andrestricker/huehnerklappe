@@ -1,6 +1,5 @@
-
-
 // returns the state of the buttons
+
 bool buttonstate(int buttonpin){
   int buttonState = digitalRead(buttonpin);
  
