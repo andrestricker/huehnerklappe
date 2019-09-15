@@ -16,6 +16,8 @@ void door_stop(){
 
 void door_up(){
   if(is_top()){
+    door_is_down=false;
+    door_is_up=true;
     return;
   }
   digitalWrite(motor_pin1, HIGH);
@@ -25,6 +27,7 @@ void door_up(){
     if(buttonstate(btn_back_pin)){
       door_stop();
       delay(display_delay);
+      set_auto_state(false);
       return;
     }
     delay(50);
@@ -39,6 +42,8 @@ void door_up(){
 
 void door_down(){
   if(is_bottom()){
+    door_is_down=true;
+    door_is_up=false;
     return;
   }
   digitalWrite(motor_pin2, HIGH);
@@ -48,6 +53,7 @@ void door_down(){
     if(buttonstate(btn_back_pin)){
       door_stop();
       delay(display_delay);
+      set_auto_state(false);
       return;
     }
     delay(50);
@@ -69,4 +75,15 @@ bool door_should_be_open(){
     return true;
   }
   return false;
+}
+
+void set_auto_state(bool state){
+  is_auto_state=state;
+  if(state){
+      set_display("Mode","Auto");
+      delay(display_delay);
+    } else {
+      set_display("Mode","Manual");
+      delay(display_delay);
+    }
 }

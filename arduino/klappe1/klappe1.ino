@@ -13,7 +13,7 @@ int minutes_open=30;
 int hours_close=15;
 int minutes_close=0;
 
-int light_threshold=3;
+int light_threshold=10;
 
 
 
@@ -35,6 +35,8 @@ bool PM;
 byte ADay, AHour, AMinute, ASecond, ABits;
 bool ADy, A12h, Apm;
 
+String date_delimiter=".";
+String time_delimiter=":";
 
 // SSD1306 OLED
 #define I2C_ADDRESS 0x3C
@@ -72,7 +74,7 @@ int light_measure_counter=0;
 
 
 // Idle Display variables
-char* idle_display_content="brightness";              // brightness or temperature
+char* idle_display_content="brightness";              // brightness, datetime or temperature
 String buf_line1;
 String buf_line2;
 int display_delay=1000;                               // delay after each interaction
@@ -87,31 +89,36 @@ bool door_is_down=false;
 bool is_auto_state=true;
 
 
-
-
 void loop() {
+  
   light_intensity=get_light_intensity();
   
   //idle display
-  if(idle_display_content=="brightness"){
-    set_display("Brightness",String(flattened_light_intensity));
-  } 
+  if(is_auto_state){
+    if(idle_display_content=="brightness"){
+      set_display("Brightness",String(flattened_light_intensity));
+    } 
   
-  else if(idle_display_content=="temperature"){
-    set_display("Temperature",String(get_temperature()));
+    else if(idle_display_content=="temperature"){
+      set_display("Temperature",String(get_temperature()));
+    }
+
+    else if(idle_display_content=="datetime"){
+      set_display(get_date_string(), get_time_string());
+    }
+
+    else if(idle_display_content=="off"){
+      set_display("", "");
+    }
+    
+  } else {
+    set_display("Manual Mode!!");
   }
   
   
   //toggle the auto state on the green button. 
   if(buttonstate(btn_ok_pin)){
-    is_auto_state=!is_auto_state;
-    if(is_auto_state){
-      set_display("Mode","Auto");
-      delay(display_delay);
-    } else {
-      set_display("Mode","Manual");
-      delay(display_delay);
-    }
+      set_auto_state(!is_auto_state);
   }
 
 
