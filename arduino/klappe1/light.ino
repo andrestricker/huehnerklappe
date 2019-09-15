@@ -3,7 +3,7 @@ int get_light_intensity(){
   return analogRead(lightsensor_pin);
 }
 
-// check if the light has passed the threshold. If so, set global var to true. If not, aset to false
+// check if the light has passed the threshold. If so, set global var to true. If not, set to false
 // The number of measures and the interval is set in the klappe-tab
 
 void set_passed_threshold(){
