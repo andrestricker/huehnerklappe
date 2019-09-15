@@ -74,7 +74,7 @@ int light_measure_counter=0;
 
 
 // Idle Display variables
-char* idle_display_content="brightness";              // brightness, datetime or temperature
+char* idle_display_content="flattened_brightness";              // brightness, flattened_brightness, datetime or temperature
 String buf_line1;
 String buf_line2;
 int display_delay=1000;                               // delay after each interaction
@@ -95,9 +95,12 @@ void loop() {
   
   //idle display
   if(is_auto_state){
+    if(idle_display_content=="flattened_brightness"){
+      set_display("Brightness (f)",String(flattened_light_intensity));
+    }
     if(idle_display_content=="brightness"){
-      set_display("Brightness",String(flattened_light_intensity));
-    } 
+      set_display("Brightness",String(light_intensity));
+    }  
   
     else if(idle_display_content=="temperature"){
       set_display("Temperature",String(get_temperature()));

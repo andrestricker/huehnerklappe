@@ -3,11 +3,15 @@ int get_current_minutes(){
   return current_minutes;
 }
 
+
+// Multiply hours with 60 and add minutes
 int calc_minutes(int hour, int minute){
   int calc_minutes=(hour*60)+minute;
   return calc_minutes;
 }
 
+
+// Build the date string
 String get_date_string(){
   int clock_day=Clock.getDate();
   int clock_month=Clock.getMonth(Century);
@@ -17,6 +21,8 @@ String get_date_string(){
   return day_string+date_delimiter+month_string+date_delimiter+"20"+String(Clock.getYear());
 }
 
+
+// Build the time string
 String get_time_string(){
   int clock_hour=Clock.getHour(h12, PM);
   int clock_minute=Clock.getMinute();
@@ -26,10 +32,10 @@ String get_time_string(){
   String second_string=pad_two(clock_second);
 
   return hour_string+time_delimiter+minute_string+time_delimiter+second_string;
-  
-  
 }
 
+
+// Function to pad with zero to two characters. 
 String pad_two(int nbr){
   String out;
   if(nbr<10){
