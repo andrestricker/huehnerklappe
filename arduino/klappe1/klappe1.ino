@@ -13,8 +13,8 @@ int minutes_open=30;
 int hours_close=15;
 int minutes_close=0;
 
-int light_threshold=10;
-
+int bottom_light_threshold=10;
+int top_light_threshold=15;
 
 
 
@@ -65,7 +65,9 @@ int motor_pin2 = 3;
 int lightsensor_pin=A0;
 int light_intensity;                                 // Container for the currently measured light intensity
 int flattened_light_intensity;
-bool light_threshold_passed=false;                   // flag if the threshold has been passed after the n measures
+bool bottom_light_threshold_passed=false;                   // flag if the threshold has been passed after the n measures
+bool top_light_threshold_passed=false;                   // flag if the threshold has been passed after the n measures
+
 int number_of_light_measures=3;                      // number of measures
 int measure_interval=5;                              // measuere every n seconds
 int light_measures[3];

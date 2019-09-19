@@ -71,7 +71,7 @@ bool door_should_be_open(){
   int opening_minutes=calc_minutes(hours_open, minutes_open);
   int closing_minutes=calc_minutes(hours_close, minutes_close);
   
-  if((opening_minutes<=get_current_minutes() and light_threshold_passed) and (closing_minutes>=get_current_minutes() or light_threshold_passed)){
+  if((opening_minutes<=get_current_minutes() and top_light_threshold_passed) and (closing_minutes>=get_current_minutes() or bottom_light_threshold_passed)){
     return true;
   }
   return false;

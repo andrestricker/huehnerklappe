@@ -18,10 +18,19 @@ void set_passed_threshold(){
       }
       light_measure_counter=0;
       flattened_light_intensity=sum/number_of_light_measures;
-      if(sum>=light_threshold*number_of_light_measures){
-        light_threshold_passed=true;
+      
+      // top threshold
+      if(sum>=top_light_threshold*number_of_light_measures){
+        top_light_threshold_passed=true;
       } else {
-        light_threshold_passed=false;
+        top_light_threshold_passed=false;
+      }
+
+      //bottom threshold
+      if(sum>=bottom_light_threshold*number_of_light_measures){
+        bottom_light_threshold_passed=true;
+      } else {
+        bottom_light_threshold_passed=false;
       }
     }
     
